@@ -12,16 +12,16 @@
 <% if user_signed_in? %>
     <% if current_user.already_liked?(@tweet) %>
         <%= button_to tweet_like_path(@tweet), method: :delete do %>
-                <i class="fas fa-heart"></i><%= @tweet.likes.count %>
+            <i class="fas fa-heart"></i><%= @tweet.likes.count %>
         <% end %>
     <% else %>
-        <%= button_to tweet_likes_path(@tweet), method: :tweet do %>
-                <i class="far fa-heart"></i><%= @tweet.likes.count %>
+        <%= button_to tweet_likes_path(@tweet), method: :post do %>
+            <i class="far fa-heart"></i><%= @tweet.likes.count %>
         <% end %>
     <% end %>
-    <% else %>
+<% else %>
     <i class="far fa-heart"></i><%= @tweet.likes.count %>
-    <% end %>
+<% end %>
 <%= link_to "編集する", edit_tweet_path(@tweet.id) %>
 </div>
 
@@ -59,4 +59,3 @@
 </div>
 
 </div>
-<%= link_to "投稿一覧に戻る", tweets_path, class: "tweet-all-button" %>

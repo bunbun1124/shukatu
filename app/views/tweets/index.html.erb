@@ -43,15 +43,15 @@
 <% @tweets.each do |t| %>
 <div class="tweet">
     <% if user_signed_in? %>
-    <% if current_user.already_liked?(t) %>
-        <%= button_to tweet_like_path(id: t.id, tweet_id: t.id), method: :delete do %>
-            <i class="fas fa-heart"></i><%= t.likes.count %>
+        <% if current_user.already_liked?(t) %>
+            <%= button_to tweet_like_path(id: t.id, tweet_id: t.id), method: :delete do %>
+              <i class="fas fa-heart"></i><%= t.likes.count %>
+            <% end %>
+        <% else %>
+            <%= button_to tweet_likes_path(id: t.id, tweet_id: t.id), method: :post do %>
+              <i class="far fa-heart"></i><%= t.likes.count %>
+            <% end %>
         <% end %>
-    <% else %>
-        <%= button_to tweet_likes_path(id: t.id, tweet_id: t.id), method: :tweet do %>
-            <i class="far fa-heart"></i><%= t.likes.count %>
-        <% end %>
-    <% end %>
     <% else %>
         <i class="far fa-heart"></i><%= t.likes.count %>
     <% end %>
