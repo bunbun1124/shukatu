@@ -1,0 +1,22 @@
+databases:
+  - name: shukatu_DB
+    databaseName: db_shukatu
+    user: shukatu #db_shukatu_user
+    region: singapore
+
+services:
+  - type: web
+    name: shukatu
+    env: ruby
+    region: singapore
+    plan: free
+    buildCommand: "./bin/render-build.sh"
+    startCommand: "bundle exec puma -C config/puma.rb"
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: shukatu_DB
+          property: connectionString
+      - key: RAILS_MASTER_KEY
+        sync: false
+
